@@ -1,6 +1,6 @@
 # ArcGIS Toolbox
 
-Welcome to the Tools Box repository! This collection of tools is designed to simplify and streamline various data management tasks.
+Welcome to the Tools Box repository! This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra_tools.tbx) is designed to simplify and streamline various data management tasks.
 - [Incremental ID Generator](#incremental-id-generator)
 - [Random Unique ID Generator](#random-unique-id-generator)
 - [Import All Project's Shapefiles In The GDB](#import-all-projects-shapefiles-in-the-gdb)
@@ -165,5 +165,21 @@ Please note that, behind the scenes, the tool specifies the LLM with additional 
 Output will be
 
 ![image](https://github.com/user-attachments/assets/06cb0082-c751-4896-818b-1d9404227554)
+
+# Licence
+This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+
+You are free to:
+- Share: Copy and redistribute the material in any medium or format.
+- Adapt: Remix, transform, and build upon the material.
+
+Under the following terms:
+- Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
+- NonCommercial: You may not use the material for commercial purposes.
+- Citation: If you republish or modify the material, please include a citation to the original work.
+
+No additional restrictions: You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
+
+For more details, see the full license at https://creativecommons.org/licenses/by-nc/4.0/.
 
 

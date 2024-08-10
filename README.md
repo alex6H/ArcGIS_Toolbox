@@ -27,10 +27,11 @@ This tool generates and populates a new column (new_ID) in an attribute table of
 The tool takes several parameters to customize the unique IDs it generates and populates in the attribute table. Here's an explanation of each parameter:
 - Input Layer : This parameter specifies the input feature class where the new column will be added and populated with unique IDs.
 - Start Value : This is the initial value for the ID sequence. The first ID will start from this number.
-- Interval : This parameter defines the increment between successive IDs. For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, etc.
+- Interval : This parameter defines the increment between successive IDs. 
+For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, etc.
 - Column Name : The name of the new column where the unique IDs will be stored. The tool checks if this column already exists and raises a warning before stopping if it does to not erase data.
 - Pad Zeroes : A boolean parameter that determines whether the IDs should be padded with leading zeros. This ensures all IDs have the same length. It is particulary useful when dealing with number in string format.
--	 Example: If there are 100 records and the IDs need to be padded with zeros, the generated IDs will be 001, 002, 003, ..., 100 instead of 1, 2, 3, ..., 100.
+	- Example: If there are 100 records and the IDs need to be padded with zeros, the generated IDs will be 001, 002, 003, ..., 100 instead of 1, 2, 3, ..., 100.
 - Prefix : An optional text string to be added before each unique ID. This can help in distinguishing IDs from different sources or datasets.
 	- Example: If the prefix is ID_, the generated IDs will be ID_001, ID_002, ID_003, ..., ID_100.
 - Suffix : An optional text string to be added after each unique ID, similar to the prefix.
@@ -40,7 +41,7 @@ The tool takes several parameters to customize the unique IDs it generates and p
 - If no prefix, suffix and padding are used, the data type will be integer (long)
 - Else, data type will be string (Text)
 
-![image](https://github.com/user-attachments/assets/9e88eeb3-47e5-43c0-9bac-ea2b6eaae906)
+![image](https://github.com/user-attachments/assets/2a94b55d-860a-4736-89f4-c1ad88120752)
 
 ## Random Unique ID Generator
 
@@ -76,7 +77,7 @@ This tool manages shapefiles within an ArcGIS Pro project by:
 - Importing shapefiles into a specified geodatabase and feature dataset.
 - Reconnecting feature layers to the imported feature classes in the geodatabase.
 
-Nothe that if you click "View details" you will have access to the logs.
+Please note that if you click "View details" you will have access to the logs.
 
 **Parameters:**
 - Geodatabase Path  (str): Path to the target File Geodatabase (GDB).

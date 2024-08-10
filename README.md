@@ -1,6 +1,8 @@
 # ArcGIS Toolbox
 
-Welcome to the Tools Box repository! This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra_tools.tbx) is designed to simplify and streamline various data management tasks.
+Welcome to the Tools Box repository! 
+
+This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra_tools.tbx) is designed to simplify and streamline various data management tasks.
 - [Incremental ID Generator](#incremental-id-generator)
 - [Random Unique ID Generator](#random-unique-id-generator)
 - [Import All Project's Shapefiles In The GDB](#import-all-projects-shapefiles-in-the-gdb)

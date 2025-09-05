@@ -1,8 +1,8 @@
 # ArcGIS Toolbox - Extra tools.tbx
 
-Welcome to the Tools Box repository! 
+Welcome to the Tools Box repository
 
-This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra_tools.tbx) is designed to simplify and streamline various data management tasks.
+This collection of tools in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) is designed to simplify and streamline various data management tasks.
 - [1. Data management](#1-data-management)
 	- [Import All Project's Shapefiles In The GDB](#import-all-projects-shapefiles-in-the-gdb)
 	- [Reproject GDB](#reproject-gdb)
@@ -15,11 +15,14 @@ This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/Ar
 - [4. ID Generator](#4-id-generator)
 	- [Incremental ID Generator](#incremental-id-generator)
 	- [Random Unique ID Generator](#random-unique-id-generator)
-- [5. Export](#1-data-management)
+- [5. Export](#5-export)
 	- [Export All Layouts into .PAGX](#export-all-layouts-into-pagx)
+- [6. AGOL - PORTAL](#6-agol---portal)
+	- [Item group membership checker](#item-group-membership-checker)
 - [License](#1-data-management)
 
-This repository is under construction. Do not hesite to raise any issue.
+The tools have been tested with Arcgis Pro 3.3.5
+This repository is under construction. Do not hesitate to raise any issue.
 
 # 1. Data management
 ## Import All Project's shapefiles In the GDB
@@ -51,7 +54,7 @@ Reproject an entire Geodatabase to a new coordinate system with ease.
 - Reprojects feature classes to a new spatial reference and saves them in a new geodatabase.
 - Optionally reconnects feature classes in an ArcGIS Pro project to the new geodatabase.
 
-Note that the new GDB will not displays automaticaly in your ArcGIS Pro project. You will have to import it manually.
+Note that the new GDB will not displays automatically in your ArcGIS Pro project. You will have to import it manually.
 
 **Parameters:**
 - Geodatabase Path (str): Path to the original geodatabase containing the feature classes and datasets to be reprojected.
@@ -77,7 +80,7 @@ The DuckDuckGo Search API is an external library that needs to be installed. How
 ![image](https://github.com/user-attachments/assets/4c01750c-bd21-4315-b66d-c32b64013c6f)
 Then clone the default _arcgispro-py3_ environnement, then switch to your new environment and restart Arcgis Pro.
 
-The first run of the tool will install DuckDuckGo Search API (internet connexion needed).
+The first run of the tool will install DuckDuckGo Search API (internet connection needed).
 
 **Parameters:**
 - Input Layer or Feature Class: Path to the input feature class or layer. This is the main dataset you will be working on.
@@ -235,7 +238,7 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 - 
 ![image](https://github.com/user-attachments/assets/a09af96e-dc34-43fd-855a-d8c0e5dd82a1)
 
-# ArcGIS Toolbox - Extra tools 2.tbx
+# 6. AGOL - PORTAL
 ## Item group membership checker
 **Feature:**
 This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.

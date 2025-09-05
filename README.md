@@ -19,6 +19,7 @@ This collection of tools in [**_Extra_tools.atbx_**](https://github.com/alex6H/A
 	- [Export All Layouts into .PAGX](#export-all-layouts-into-pagx)
 - [6. AGOL - PORTAL](#6-agol---portal)
 	- [Item group membership checker](#item-group-membership-checker)
+	- [Copy layers between web maps](#copy-layers-between-web-maps)
 - [License](#1-data-management)
 
 The tools have been tested with Arcgis Pro 3.3.5

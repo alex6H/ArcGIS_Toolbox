@@ -1,4 +1,4 @@
-# ArcGIS Toolbox
+# ArcGIS Toolbox - Extra tools.tbx
 
 Welcome to the Tools Box repository! 
 
@@ -22,7 +22,7 @@ This collection of tools in [**_Extra_tools.tbx_**](https://github.com/alex6H/Ar
 This repository is under construction. Do not hesite to raise any issue.
 
 # 1. Data management
-## Import All Project's Shapefiles In The GDB
+## Import All Project's shapefiles In the GDB
 
 Easily import all shapefiles of a project into a Geodatabase (GDB). All shapefile will be imported in EPSG 3857.
 
@@ -62,7 +62,7 @@ Note that the new GDB will not displays automaticaly in your ArcGIS Pro project.
 ![image](https://github.com/user-attachments/assets/b7eaab9a-6e94-40b4-bfa1-8a91bf005a67)
 
 # 2. Large Language Model (LLM)
-## Data Processing With Online LLM
+## Data processing with online LLM
 
 **Feature:**
 
@@ -108,7 +108,7 @@ Output will be
 ![image](https://github.com/user-attachments/assets/06cb0082-c751-4896-818b-1d9404227554)
 
 # 3. Finder
-## Unused Feature Class Finder V2
+## Unused feature class finder V2
 
 Identify and manage unused feature classes within your Geodatabase to optimize storage and organization.
 
@@ -142,7 +142,7 @@ This tool helps you search through all .aprx files in a specified folder and sub
 
 Results will be in the "View" Details". 
 
-## Data Finder with AOI
+## Data finder with AOI
 
 **Feature:**
 
@@ -169,7 +169,7 @@ If you need to determine whether relevant data exists within a specific AOI, thi
 Results are in the log "View details"
 
 # 4. ID Generator
-## Incremental ID Generator
+## Incremental ID generator
 
 This tool generates and populates a new column (new_ID) in an attribute table of a specified input layer with unique incremental IDs. These IDs can be customized with prefixes, suffixes, and zero padding, depending on user preferences. Ideal for creating ordered identifiers.
 
@@ -201,7 +201,7 @@ For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, et
 
 ![image](https://github.com/user-attachments/assets/2a94b55d-860a-4736-89f4-c1ad88120752)
 
-## Random Unique ID Generator
+## Random unique ID generator
 
 **Feature:**
 This tool create a column with unique random ID in the attribute table of a GDB feature class. The ID can include numbers, letters (upper, lower, or mixed case), and can have a specified maximum length.
@@ -223,7 +223,7 @@ This tool create a column with unique random ID in the attribute table of a GDB 
 ![image](https://github.com/user-attachments/assets/e5045aca-e624-4166-b509-c7b3d0e00cfb)
 
 # 5. Export
-## Export All Layouts into .PAGX
+## Export all layouts into .PAGX
 **Feature:**
 
 This script automates the export of all layouts within an ArcGIS Pro project to individual .pagx files. It simplifies the process of extracting layout designs from a project, making it easy to share or reuse layouts in other projects.
@@ -234,6 +234,38 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 - Output directory: The directory where the exported .pagx files will be saved. Each layout will be saved as a separate .pagx file in this location.
 - 
 ![image](https://github.com/user-attachments/assets/a09af96e-dc34-43fd-855a-d8c0e5dd82a1)
+
+# ArcGIS Toolbox - Extra tools 2.tbx
+## Item group membership checker
+**Feature:**
+This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
+
+<img width="745" height="189" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
+
+It doesn't work in all cases (see Limitations)!
+**
+What It Does:**
+
+<img width="726" height="489" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
+
+- Checks all the groups an ArcGIS item is shared with and verifies if you're a member or owner of these groups.
+- Automatically attempts to add your user account to groups you're not already a member of.
+- Logs detailed results and provides clear feedback on membership and ownership status.
+
+<img width="974" height="810" alt="image" src="https://github.com/user-attachments/assets/bdca9ab2-72bc-4941-9da7-afaca975d342" />
+
+**Parameters:**
+- Enter one or more ArcGIS item IDs you want to check or manage.
+- Add User to Groups : Choose whether to automatically add yourself to groups you're not currently a member of.
+- Take item ownership : Decide if you want the tool to attempt taking ownership of the specified items.
+- Run the tool and review the detailed messages provided in the AGP log/messages window.
+Note that if none of the checkboxes are selected, the logs gives your current user status in each groups
+
+**Limitations:**
+- You must have sufficient permissions in at least one shared group to successfully transfer ownership.
+- Ownership transfer will fail if any associated group has restricted permissions set to "Group owner and managers" only, rather than "All group members".
+
+<img width="745" height="236" alt="image" src="https://github.com/user-attachments/assets/e6849772-333e-4884-ad77-56f089bfe8e8" />
 
 # Licence
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.

@@ -240,6 +240,7 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 
 # 6. AGOL - PORTAL
 ## Item group membership checker
+
 **Feature:**
 This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
 
@@ -258,6 +259,7 @@ What It Does:**
 <img width="974" height="810" alt="image" src="https://github.com/user-attachments/assets/bdca9ab2-72bc-4941-9da7-afaca975d342" />
 
 **Parameters:**
+
 - Enter one or more ArcGIS item IDs you want to check or manage.
 - Add User to Groups : Choose whether to automatically add yourself to groups you're not currently a member of.
 - Take item ownership : Decide if you want the tool to attempt taking ownership of the specified items.
@@ -265,10 +267,41 @@ What It Does:**
 Note that if none of the checkboxes are selected, the logs gives your current user status in each groups
 
 **Limitations:**
+
 - You must have sufficient permissions in at least one shared group to successfully transfer ownership.
 - Ownership transfer will fail if any associated group has restricted permissions set to "Group owner and managers" only, rather than "All group members".
 
 <img width="745" height="236" alt="image" src="https://github.com/user-attachments/assets/e6849772-333e-4884-ad77-56f089bfe8e8" />
+
+## Copy layers between web maps
+**Feature:**
+This tool automates the process of copying layers from a source Web Map to one or more target Web Maps in AGOL PORTAL. 
+It supports the preservation of :
+- Symbology
+- Labels
+- Popups
+- Filters
+- Visibility range
+- Group layer structures
+- etc
+
+**Parameters:**
+
+First of all, save the current modification in your webmaps then : 
+Source WebMap: Enter the source web map as the source for the layer(s) to be copy.
+Target WebMaps:  List of target web maps as the destination for the layer(s) to be copy
+Layer Names: Specify the layer(s) titles to copy from the source map to each target map.
+
+<img width="660" height="576" alt="image" src="https://github.com/user-attachments/assets/f40f75f4-903d-43e2-9419-cbf55969e13c" />
+
+Run the script then refresh the webmaps pages.
+The AGP log/messages window provide the detailed of what is happening behind the curtains
+
+**Limitations:**
+
+- Ownership Restrictions: You can only view and copy layers between web maps that you own. Web maps not owned by you are inaccessible for these operations.
+- Connection Dependency: The tool relies on the current ArcGIS Pro connection to either PORTAL or AGOL. If neither is connected, an error will occur. If you don't see the expected webmap, check the connection and ownership.
+- Loading Time: The tool requires time to load as it retrieves web map and layer lists from AGOL or PORTAL based on your selections. Please be patient during this process.
 
 # Licence
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.

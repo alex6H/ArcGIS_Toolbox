@@ -1,8 +1,9 @@
 # ArcGIS Toolbox - Extra tools.tbx
 
-Welcome to the Tools Box repository
+Welcome to the Tools Box repository, a collection of **custom ArcGIS Pro geoprocessing tools** to make some repetitive actions easier.  
+All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) and leverage Python functionality to streamline data management and automate workflows in both ArcGIS Pro and ArcGIS Online/Portal.
 
-This collection of tools in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) is designed to simplify and streamline various data management tasks.
+## Content
 - [1. Data management](#1-data-management)
 	- [Import All Project's Shapefiles In The GDB](#import-all-projects-shapefiles-in-the-gdb)
 	- [Reproject GDB](#reproject-gdb)
@@ -20,13 +21,22 @@ This collection of tools in [**_Extra_tools.atbx_**](https://github.com/alex6H/A
 - [6. AGOL - PORTAL](#6-agol---portal)
 	- [Item group membership checker](#item-group-membership-checker)
 	- [Copy layers between web maps](#copy-layers-between-web-maps)
-- [License](#1-data-management)
+ 	- [Copy layer symbology](#copy-layer-symbology)
+- [Licence](#licence)
 
-The tools have been tested with Arcgis Pro 3.3.5
 This repository is under construction. Do not hesitate to raise any issue.
 
+## Requirements
+- **ArcGIS Pro 3.x** with the default Python environment (`arcgispro-py3`)
+- For some tools, ability to clone the ArcGIS environment to install extra packages
+The tools have been tested with Arcgis Pro 3.3.5
+
+## Installation
+- Open ArcGIS Pro → Add Toolbox → select ArcGIS_Toolbox.atbx
+- Run any tool from the toolbox just like built-in geoprocessing tools
+
 # 1. Data management
-## Import All Project's shapefiles In the GDB
+## Import All Project's shapefiles in the GDB
 
 Easily import all shapefiles of a project into a Geodatabase (GDB). All shapefile will be imported in EPSG 3857.
 

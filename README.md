@@ -243,6 +243,7 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 ## Item group membership checker
 
 **Feature:**
+
 This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
 
 <img width="745" height="189" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
@@ -303,6 +304,35 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Ownership Restrictions: You can only view and copy layers between web maps that you own. Web maps not owned by you are inaccessible for these operations.
 - Connection Dependency: The tool relies on the current ArcGIS Pro connection to either PORTAL or AGOL. If neither is connected, an error will occur. If you don't see the expected webmap, check the connection and ownership.
 - Loading Time: The tool requires time to load as it retrieves web map and layer lists from AGOL or PORTAL based on your selections. Please be patient during this process.
+
+## Copy layer symbology
+**Feature:**
+
+- Synchronizes layer symbology and related visual settings from a source web map to one or more target web maps.
+- Matches layers by name and data source to ensure accurate symbology transfer.
+- Can optionally copy display settings (opacity, visibility, scale, labels) and popup configuration (popupInfo, disablePopup).
+- Supports batch processing for multiple target web maps.
+- Optional verbose mode for advanced debugging and detailed output.
+
+<img width="726" height="534" alt="image" src="https://github.com/user-attachments/assets/d74dc1f8-1dd6-4cb5-82dc-1e985936c6ac" />
+
+**Parameters:**
+
+| Parameter                | Description                                                           | Required | Example                                      |
+|--------------------------|----------------------------------------------------------------------|----------|----------------------------------------------|
+| Source Web Map           | Item ID of the source web map to copy symbology from                 | Yes      | `123abc456def789ghi012jkl345mno678pqr`       |
+| Target Web Map(s)        | Semicolon-separated list of target web map Item IDs                  | Yes      | `987zyx654wvu321tsr;654zyx321wvu987tsr`      |
+| Layer(s) to Copy         | Semicolon-separated list of layer names to synchronize               | Yes      | `Layer1;Layer2`                              |
+| Copy Display Settings    | Copy display settings (opacity, visibility, etc.)                    | Optional | Checked/Unchecked                            |
+| Copy Popup Settings      | Copy popup settings (popupInfo, disablePopup)                        | Optional | Checked/Unchecked                            |
+| Copy symbology and effect| Copy symbology and effect (popupInfo, disablePopup)                  | Optional | Checked/Unchecked                            |
+| Verbose Output           | Enable verbose logging (detailed output)                             | Optional | Checked/Unchecked                            |
+
+**Limitations:**
+
+- Layers must match by **name** and **data source** for symbology to be transferred.
+- Requires a valid connection to ArcGIS Online or Portal for ArcGIS.
+- Target web maps must have edit permissions.
 
 # Licence
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.

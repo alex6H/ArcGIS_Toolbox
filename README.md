@@ -10,7 +10,7 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
 - [2. Large Language Model (LLM)](#2-large-language-model-llm)
 	- [Data Processing With Online LLM](#data-processing-with-online-llm)
 - [3. Finder](#3-finder)
-	- [Unused Feature Class Finder V2](#unused-feature-class-finder-v2)
+	- [Unused Feature Class Finder](#unused-feature-class-finder)
  	- [Layout Finder](#layout-finder)
 	- [Data Finder with AOI](#data-finder-with-aoi)
 - [4. ID Generator](#4-id-generator)
@@ -18,10 +18,12 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
 	- [Random Unique ID Generator](#random-unique-id-generator)
 - [5. Export](#5-export)
 	- [Export All Layouts into .PAGX](#export-all-layouts-into-pagx)
+ 	- [Export All Layouts into .MAPX](#export-all-layouts-into-mapx)
 - [6. AGOL - PORTAL](#6-agol---portal)
 	- [Item group membership checker](#item-group-membership-checker)
 	- [Copy layers between web maps](#copy-layers-between-web-maps)
  	- [Copy layer symbology](#copy-layer-symbology)
+ 	- [Copy Bookmarks Between WebMaps](#copy-bookmarks-between-web-maps)
 - [Licence](#licence)
 
 This repository is under construction. Do not hesitate to raise any issue.
@@ -122,7 +124,7 @@ Output will be
 ![image](https://github.com/user-attachments/assets/06cb0082-c751-4896-818b-1d9404227554)
 
 # 3. Finder
-## Unused feature class finder V2
+## Unused feature class finder
 
 Identify and manage unused feature classes within your Geodatabase to optimize storage and organization.
 
@@ -188,6 +190,7 @@ Results are in the log "View details"
 This tool generates and populates a new column (new_ID) in an attribute table of a specified input layer with unique incremental IDs. These IDs can be customized with prefixes, suffixes, and zero padding, depending on user preferences. Ideal for creating ordered identifiers.
 
 **Features:**
+
 - Adds sequential IDs to a column in an ArcGIS layer.
 - Allows customization of the starting value and interval for the IDs.
 - Optionally pads IDs with leading zeroes for consistent length.
@@ -221,18 +224,15 @@ For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, et
 This tool create a column with unique random ID in the attribute table of a GDB feature class. The ID can include numbers, letters (upper, lower, or mixed case), and can have a specified maximum length.
 
 **Parameters:**
-- Input Layer or Feature class : This parameter specifies the input feature class where the new column will be added and populated with unique IDs.
-- Name of the new column : Name of the field where the unique ID will be added.
-- Include Number: A boolean parameter that determines whether numbers (0 to 9) should be included in the unique ID.
-- Include Letters : A boolean parameter that determines whether letters (A to Z) should be included in the unique ID.
-- Letter Case : Specifies the case of the letters used in the unique ID. Options are 'upper', 'lower', or 'mixed'. Example:
-  - 'upper' (to include uppercase letters only, e.g., ABC)
-  - 'lower' (to include lowercase letters only, e.g., abc)
-  - 'mixed' (to include both upper and lower case letters, e.g., aBc)
-- Maximum Length: Length of the unique ID. Example:
-  - 5 (to generate IDs up to 5 characters long, e.g., aB3dE)
-  - 8 (to generate IDs up to 8 characters long, e.g., A1b2C3d4)
-  - 10 (to generate IDs up to 10 characters long, e.g., Ab3De4Fg5H)
+
+| Parameter                | Description                                                                                      | Required | Example                         |
+|--------------------------|--------------------------------------------------------------------------------------------------|----------|---------------------------------|
+| Input Layer or Feature class | The input feature class where the new column will be added and populated with unique IDs.        | Yes      | `Parcels` or `C:\data\roads.gdb\roads_fc` |
+| Name of the new column   | Name of the field where the unique ID will be added.                                             | Yes      | `UniqueID`                      |
+| Include Number           | Whether numbers (0-9) should be included in the unique ID.                                       | Yes      | `True` or `False`               |
+| Include Letters          | Whether letters (A-Z) should be included in the unique ID.                                       | Yes      | `True` or `False`               |
+| Letter Case              | Case of the letters used: 'upper', 'lower', or 'mixed'.                                          | Yes      | `upper`, `lower`, `mixed`       |
+| Maximum Length           | Maximum length of the unique ID to generate.                                                     | Yes      | `5`, `8`, `10`                  |
 
 ![image](https://github.com/user-attachments/assets/e5045aca-e624-4166-b509-c7b3d0e00cfb)
 
@@ -246,8 +246,29 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 
 - APRX Path: The file path to the ArcGIS Pro project (.aprx) from which the layouts will be exported. If left blank, the script will use the currently open project.
 - Output directory: The directory where the exported .pagx files will be saved. Each layout will be saved as a separate .pagx file in this location.
-- 
+
 ![image](https://github.com/user-attachments/assets/a09af96e-dc34-43fd-855a-d8c0e5dd82a1)
+
+## Export all layouts into .MAPX
+**Feature:**
+
+- Exports every map in an ArcGIS Pro project to individual .mapx files.
+- Automatically creates filesystem-safe filenames by replacing non-alphanumeric characters with underscores.
+- Supports exporting from either a specified .aprx file or the currently open ArcGIS Pro project.
+- Provides progress messages and warnings via the ArcGIS Pro geoprocessing messages window.
+
+
+**Parameters:**
+
+| Parameter        | Description                                                                     | Required | Example                         |
+|------------------|---------------------------------------------------------------------------------|----------|---------------------------------|
+| APRX Path        | Path to the ArcGIS Pro project (.aprx). If empty, uses the currently open project. | Yes      | `C:\Projects\MyProject.aprx`    |
+| Output Directory | Directory where the exported `.mapx` files will be saved.                        | Yes      | `C:\Exports\MapX`               |
+
+**Limitations:**
+
+- Filenames are sanitized: all non-alphanumeric characters in map names are replaced with underscores.
+- Does not overwrite existing .mapx files with the same name; existing files may be replaced without warning.
 
 # 6. AGOL - PORTAL
 ## Item group membership checker

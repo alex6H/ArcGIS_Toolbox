@@ -4,10 +4,10 @@
 [![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 
-> **Status:** Repository under active development. Feedback and contributions welcome!
-
 Welcome to the Tools Box repository, a collection of **custom ArcGIS Pro geoprocessing tools** to make some repetitive actions easier.  
 All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) and leverage Python functionality to streamline data management and automate workflows in both ArcGIS Pro and ArcGIS Online/Portal.
+
+> **Status:** Repository under active development. Feedback and contributions welcome!
 
 ## Content
 - [1. Data management](#1-data-management)

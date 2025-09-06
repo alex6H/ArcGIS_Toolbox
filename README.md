@@ -61,18 +61,20 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
    - Click the settings wheel ➔ Clone `arcgispro-py3`.
    - Switch to your new environment and restart ArcGIS Pro.
 
+
+---
+
 # 1. Data management
 ## Import All Project's shapefiles in the GDB
 
-Easily import all shapefiles of a project into a Geodatabase (GDB). All shapefile will be imported in EPSG 3857.
-
 **Feature:**
 
-This tool manages shapefiles within an ArcGIS Pro project by:
+Effortlessly import all shapefiles from your ArcGIS Pro project into a File Geodatabase (GDB), reprojecting them to [EPSG:3857 (Web Mercator)](https://epsg.io/3857). Optionally, reconnect your project’s feature layers to the newly imported feature classes.
 
-- Extracting file paths of feature layers.
-- Importing shapefiles into a specified geodatabase and feature dataset.
-- Reconnecting feature layers to the imported feature classes in the geodatabase.
+- Automatic Extraction: Finds all shapefile-based feature layers in your ArcGIS Pro project (.aprx).
+- Batch Import: Imports all shapefiles into a specified GDB and feature dataset with a uniform spatial reference (EPSG:3857).
+- Layer Reconnection: Optionally, updates the project to reference the new GDB feature classes rather than the original shapefiles.
+- Detailed Logging: View process status and logs directly in the geoprocessing tool’s "View details" pane.
 
 Please note that if you click "View details" you will have access to the logs.
 
@@ -85,11 +87,18 @@ Please note that if you click "View details" you will have access to the logs.
 
 ![image](https://github.com/user-attachments/assets/4d6876b7-927e-4095-b869-ec6dcb59fa54)
 
+**Limitations**
+
+- Overwrite Protection: If a feature class with the same name already exists in the GDB, the corresponding shapefile will be skipped and not reconnected.
+- Spatial Reference: All imported data is reprojected to EPSG:3857 (Web Mercator).
+- Feature Dataset Name: All shapefiles are imported into a feature dataset named `imported_shapefiles` (created if it does not exist).
+
 ## Reproject GDB
 
-Reproject an entire Geodatabase to a new coordinate system with ease.
-
 **Feature:**
+
+Easily reproject all feature classes and datasets in a Geodatabase to a new coordinate system, and optionally update your ArcGIS Pro project to use the new geodatabase.
+
 - Retrieves all feature classes and feature datasets from a specified geodatabase.
 - Reprojects feature classes to a new spatial reference and saves them in a new geodatabase.
 - Optionally reconnects feature classes in an ArcGIS Pro project to the new geodatabase.
@@ -107,6 +116,11 @@ Note that the new GDB will not displays automatically in your ArcGIS Pro project
 
 ![image](https://github.com/user-attachments/assets/b7eaab9a-6e94-40b4-bfa1-8a91bf005a67)
 
+**Limitations**
+- Name Conflicts: If the new geodatabase name already exists, a suffix will be added to avoid overwriting existing data.
+
+
+---
 
 # 2. Large Language Model (LLM)
 ## Data processing with online LLM
@@ -149,14 +163,23 @@ Output will be
 ![image](https://github.com/user-attachments/assets/06cb0082-c751-4896-818b-1d9404227554)
 
 
+---
+
 # 3. Finder
 ## Unused feature class finder
-
-Identify and manage unused feature classes within your Geodatabase to optimize storage and organization.
 
 **Feature:**
 
 This tool identifies feature classes in specified geodatabases that are not used in any specified ArcGIS project maps. It compares the feature classes listed in the geodatabases against those referenced in the provided ArcGIS project files.
+
+- Scans specified geodatabases and compares all their feature classes against those referenced in ArcGIS Pro project maps.
+- Works across multiple ArcGIS Pro project files or with the currently open project.
+- Lists all unused feature classes directly in the geoprocessing tool logs for review and action.
+
+> **Note:** Open "View details" at the bottom of the tool to see the full list of unused feature classes in the logs.
+> 
+> ![image](https://github.com/user-attachments/assets/43066d53-a019-4831-87a0-fd4b7293c96b)
+
 
 **Parameters:**
 
@@ -168,15 +191,27 @@ This tool identifies feature classes in specified geodatabases that are not used
 
 ![image](https://github.com/user-attachments/assets/45eba596-fff1-4237-8432-85c951b64de4)
 
-Note that you will need to open "view details" at the bottom of the tool to see the list of unused feature classes in the logs.
 
-![image](https://github.com/user-attachments/assets/43066d53-a019-4831-87a0-fd4b7293c96b)
+**Limitations**
+- Only feature classes (not tables, rasters, or other data types) are evaluated.
+- The tool identifies unused feature classes; removal and management are manual.
+- Only explicit references in maps are considered. Feature classes used by scripts, models, or other indirect means may not be detected as "used."
+- For very large or networked geodatabases/projects, processing may take longer. If some of your data are on the cloud (onedrive, etc) they will be downloaded for evaluation !
+
 
 ## Layout Finder
 
 **Feature:**
 
 This tool helps you search through all .aprx files in a specified folder and subfolders to find any layouts whose names contain a specific substring. It identifies and lists the project files and corresponding layout names that match your search criteria.
+
+- Scans all subfolders for `.aprx` files starting from the specified root folder.
+- Finds all layouts whose names contain the provided (case-insensitive) substring.
+- Lists each project file and the layout names that match your search.
+- Continues processing even if some `.aprx` files cannot be opened.
+
+> **Note:** Results are displayed in the "View Details" panel in ArcGIS Pro.
+
 
 **Parameters**
 
@@ -189,13 +224,28 @@ This tool helps you search through all .aprx files in a specified folder and sub
 
 Results will be in the "View" Details". 
 
+**Limitations**
+
+- Only identifies layouts; does not check maps, reports, or other project elements.
+- Large folders or network drives may take longer to process.
+
 ## Data finder with AOI
 
 **Feature:**
-
-This tool searches through geodatabases, shapefiles, and GPX files within a specified folder and its subfolders to identify features that match a defined spatial relationship (e.g., INTERSECT, WITHIN) with a given Area of Interest (AOI). It also allows filtering by geometry type (points, lines, polygons).
+Automatically search geodatabases, shapefiles, and GPX files within specified folders (and subfolders) to identify datasets with features matching a spatial relationship (e.g., INTERSECT, WITHIN) to a given Area of Interest (AOI). Filter results by geometry type (points, lines, polygons) for rapid, targeted data discovery.
 
 If you need to determine whether relevant data exists within a specific AOI, this tool automates the search process across multiple files and folders.
+
+- Scans for feature classes in geodatabases (`.gdb`), shapefiles (`.shp`), and GPX files (`.gpx`).
+- Identifies datasets whose features match a specified spatial relationship (INTERSECT, WITHIN, CONTAINS, TOUCHES, OVERLAPS, CROSSES, etc.) with your AOI polygon.
+- Restrict results to selected geometry types (POINT/MULTIPOINT, LINE/POLYLINE, POLYGON).
+- Handles multiple folder paths; walks subdirectories automatically.
+- Results are listed in the ArcGIS Pro "View Details" log, with dataset names and locations.
+- Displays status updates and progress throughout large searches.
+
+> Results are in the log "View details"
+> 
+> ![image](https://github.com/user-attachments/assets/9e62ea86-63f4-48b6-aa4f-6bec158e4086)
 
 **Parameters**
 
@@ -211,23 +261,31 @@ If you need to determine whether relevant data exists within a specific AOI, thi
 | Lines                | bool                | Include LINE geometry types.                                                                                 | Yes      | True                                   |
 | Polygons             | bool                | Include POLYGON geometry types.                                                                              | Yes      | True                                   |
 
-![image](https://github.com/user-attachments/assets/9e62ea86-63f4-48b6-aa4f-6bec158e4086)
+**Limitations**
 
-Results are in the log "View details"
 
+- AOI must be a polygon feature class.
+- All folders and files must be accessible; locked or corrupt files will be skipped with warnings.
+- GPX files are always searched as POINT features.
+- Large directories or network drives may increase processing time.
+- The tool lists matching datasets; further analysis or management is manual.
+
+
+---
 
 # 4. ID Generator
 ## Incremental ID generator
 
-This tool generates and populates a new column (new_ID) in an attribute table of a specified input layer with unique incremental IDs. These IDs can be customized with prefixes, suffixes, and zero padding, depending on user preferences. Ideal for creating ordered identifiers.
-
 **Features:**
 
-- Adds sequential IDs to a column in an ArcGIS layer.
-- Allows customization of the starting value and interval for the IDs.
-- Optionally pads IDs with leading zeroes for consistent length.
-- Supports adding a prefix and/or suffix to the IDs.
-- Automatically adds the specified column to the input layer if it doesn't exist.
+Automatically generate and populate a new column with unique sequential IDs in any ArcGIS layer or table. IDs can have custom prefixes, suffixes, and zero padding for standardized formats—ideal for parcel numbering, sample IDs, or any scenario requiring ordered identifiers.
+
+- Assigns incremental IDs to each record in the input layer/table.
+- Supports custom start value, interval, prefix, suffix, and zero-padding.
+- Adds the new column if it doesn't exist; aborts (with warning) if it does to prevent overwriting.
+- Uses integer (LONG) if no prefix/suffix/padding; otherwise uses string (TEXT).
+
+> **Note:** If no prefix, suffix, or padding is specified, the column is numeric (LONG). Otherwise, it is string (TEXT).
 
 **Parameters:**
 
@@ -241,17 +299,26 @@ This tool generates and populates a new column (new_ID) in an attribute table of
 | Prefix        | str (optional)| Optional text to add before each unique ID.                                                                                   | No       | "ID_"                  |
 | Suffix        | str (optional)| Optional text to add after each unique ID.                                                                                    | No       | "_A"                   |
 
-**Note that :**
-- If no prefix, suffix and padding are used, the data type will be integer (long)
-- Else, data type will be string (Text)
 
 ![image](https://github.com/user-attachments/assets/2a94b55d-860a-4736-89f4-c1ad88120752)
+
+**Limitations**
+
+- If the column name exists, processing stops with a warning.
+- Any use of prefix, suffix, or zero-padding makes the field type TEXT.
 
 ## Random unique ID generator
 
 **Feature:**
 
-This tool create a column with unique random ID in the attribute table of a GDB feature class. The ID can include numbers, letters (upper, lower, or mixed case), and can have a specified maximum length.
+Automatically create and populate a new column with unique random IDs in the attribute table of any GDB feature class. IDs can include numbers, uppercase and/or lowercase letters, and are generated to a specified maximum length—ensuring uniqueness across all features.
+
+- Guarantees no duplicate IDs within the feature class.
+- Choose to include numbers, letters (A-Z, a-z, or both), and control letter case (upper, lower, mixed).
+- Specify the maximum length of the ID (e.g., 5, 8, 10 characters).
+- Adds the new field if it doesn't exist.
+- Validates sufficient possible combinations for unique IDs; aborts with an error if not possible.
+- Efficient approach even for large datasets (with safeguards for extremely large tables/short IDs).
 
 **Parameters:**
 
@@ -266,22 +333,45 @@ This tool create a column with unique random ID in the attribute table of a GDB 
 
 ![image](https://github.com/user-attachments/assets/e5045aca-e624-4166-b509-c7b3d0e00cfb)
 
+**Limitations**
+
+- If the number of possible unique IDs is less than the number of features, the tool aborts with an error.
+- Special characters are not supported (only digits and English letters).
+- For very large datasets and short ID lengths, generation may slow or fail (max 10,000 attempts per row).
+- IDs are written directly to the source data (backup before running if necessary).
+
+
+---
 
 # 5. Export
 
 ## Export all layouts into .PAGX
+
 **Feature:**
 
 This script automates the export of all layouts within an ArcGIS Pro project to individual .pagx files. It simplifies the process of extracting layout designs from a project, making it easy to share or reuse layouts in other projects.
 
+- Automatically extracts all layouts from a specified `.aprx` project file.
+- Works with either a given `.aprx` file path or the currently open ArcGIS Pro project.
+- Saves each layout as a separate `.pagx` file in your chosen directory, named after the layout.
+
 **Parameters:**
 
-- APRX Path: The file path to the ArcGIS Pro project (.aprx) from which the layouts will be exported. If left blank, the script will use the currently open project.
-- Output directory: The directory where the exported .pagx files will be saved. Each layout will be saved as a separate .pagx file in this location.
+| Parameter        | Type | Description                                                                                      | Required | Example                              |
+|------------------|------|--------------------------------------------------------------------------------------------------|----------|--------------------------------------|
+| APRX Path        | str  | Path to the ArcGIS Pro project (`.aprx`). Leave blank to use the currently open project.         | No       | `C:/GIS/projects/myproject.aprx`     |
+| Output Directory | str  | Directory for saving the exported `.pagx` files. Each layout is saved as a separate file.        | Yes      | `C:/GIS/exports/layouts`             |
 
 ![image](https://github.com/user-attachments/assets/a09af96e-dc34-43fd-855a-d8c0e5dd82a1)
 
+**Limitations**
+
+- If multiple layouts share a name, they will overwrite each other's `.pagx` file.
+- Output directory must exist; the tool does not create it.
+- All layouts are exported; no selection/filtering is available.
+
 ## Export all layouts into .MAPX
+
 **Feature:**
 
 - Exports every map in an ArcGIS Pro project to individual .mapx files.
@@ -297,11 +387,15 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 | APRX Path        | Path to the ArcGIS Pro project (.aprx). If empty, uses the currently open project. | Yes      | `C:\Projects\MyProject.aprx`    |
 | Output Directory | Directory where the exported `.mapx` files will be saved.                        | Yes      | `C:\Exports\MapX`               |
 
+![Untitled](https://github.com/user-attachments/assets/bdec0dd0-e9d5-4a0b-95c9-46bf0fbf20c4)
+
 **Limitations:**
 
 - Filenames are sanitized: all non-alphanumeric characters in map names are replaced with underscores.
 - Does not overwrite existing .mapx files with the same name; existing files may be replaced without warning.
 
+
+---
 
 # 6. AGOL - PORTAL
 ## Item group membership checker
@@ -313,8 +407,6 @@ This tool tries to solve the problem of not being able to add yourself as the ow
 <img width="545" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
 
 It doesn't work in all cases (see Limitations)!
-
-**What It Does:**
 
 - Checks all the groups an ArcGIS item is shared with and verifies if you're a member or owner of these groups.
 - Automatically attempts to add your user account to groups you're not already a member of.
@@ -330,14 +422,15 @@ It doesn't work in all cases (see Limitations)!
 | Add User to Groups    | bool                | Automatically add yourself to groups you're not currently a member of.                                         | No       | True                                |
 | Take Item Ownership   | bool                | Attempt to take ownership of the specified items.                                                             | No       | False                               |
 
-Note that if none of the checkboxes are selected, the logs gives your current user status in each groups
-
 <img width="426" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
+
+
+> **Note:** If none of the checkboxes are selected, the logs gives your current user status in each groups
 
 **Limitations:**
 
 - You must have sufficient permissions in at least one shared group to successfully transfer ownership.
-- Ownership transfer will fail if any associated group has restricted permissions set to "Group owner and managers" only, rather than "All group members".
+- If you don't have admin privileges, the ownership transfer will fail if any associated group has restricted permissions set to "Group owner and managers" only, rather than "All group members".
 
 <img width="545" alt="image" src="https://github.com/user-attachments/assets/e6849772-333e-4884-ad77-56f089bfe8e8" />
 
@@ -364,8 +457,13 @@ It supports the preservation of :
 
 <img width="460" alt="image" src="https://github.com/user-attachments/assets/61e71f81-fb14-48ea-a424-cf523f218c5f" />
 
-Run the script then refresh the webmaps pages.
-The AGP log/messages window provide the detailed of what is happening behind the curtains
+
+
+> **Note:**
+> 
+> Run the script then refresh the webmaps pages.
+> 
+> The AGP log/messages window provide the detailed of what is happening behind the curtains
 
 **Limitations:**
 
@@ -383,8 +481,6 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Supports batch processing for multiple target web maps.
 - Optional verbose mode for advanced debugging and detailed output.
 
-<img width="526"  alt="image" src="https://github.com/user-attachments/assets/d74dc1f8-1dd6-4cb5-82dc-1e985936c6ac" />
-
 **Parameters:**
 
 | Parameter                | Description                                                           | Required | Example                                      |
@@ -397,6 +493,8 @@ The AGP log/messages window provide the detailed of what is happening behind the
 | Copy symbology and effect| Copy symbology and effect (popupInfo, disablePopup)                  | Optional | Checked/Unchecked                            |
 | Verbose Output           | Enable verbose logging (detailed output)                             | Optional | Checked/Unchecked                            |
 
+<img width="526"  alt="image" src="https://github.com/user-attachments/assets/d74dc1f8-1dd6-4cb5-82dc-1e985936c6ac" />
+
 **Limitations:**
 
 - Layers must match by **name** and **data source** for symbology to be transferred.
@@ -408,8 +506,6 @@ The AGP log/messages window provide the detailed of what is happening behind the
 **Feature:**
 Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the transfer of all bookmarks from a source web map to one or more target web maps in AGOL or Portal for ArcGIS. The tool ensures each bookmark is uniquely named in the target maps, minimizing manual effort and helping maintain consistent navigation experiences across multiple web maps.
 
-<img width="526"  alt="image" src="https://github.com/user-attachments/assets/5437e701-21cd-426c-b769-2b7ce270b4f4" />
-
 **Parameters:**
 
 | Parameter          | Description                                                      | Required | Example                                         |
@@ -418,12 +514,17 @@ Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the trans
 | Target Web Maps    | List of target web maps in same format   					    | Yes      | f98e76d54c32b10a98e76d54c32b10a9;e12f34g56h78i90j12k34l56m78n90op` |
 | Verbose Logging    | Enable detailed logging output                                   | Optional | Checked/Unchecked                               |
 
+<img width="526"  alt="image" src="https://github.com/user-attachments/assets/5437e701-21cd-426c-b769-2b7ce270b4f4" />
+
 **Limitations:**
 - Ownership & Permissions: You must own or have edit permissions for all target web maps.
 - Connection Dependency: The tool requires an active ArcGIS Pro connection to AGOL or Portal. If not connected, the tool will fail.
 - Bookmark Name Conflicts: If a bookmark name already exists in the target, the tool appends an incremental suffix (e.g., _1, _2) to ensure uniqueness.
 - No Selective Copy: All bookmarks from the source map are copied; selective copying is not yet supported.
 - Web Map Format: Only works with "Web Map" items (not "Web Scene" or other types).
+
+
+---
 
 ## License
 
@@ -440,6 +541,8 @@ Under these terms:
 
 For full details, see the [license](https://creativecommons.org/licenses/by-nc/4.0/).
 
+
+---
 
 ## Contact & Issues
 

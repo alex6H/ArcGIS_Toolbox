@@ -344,6 +344,26 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Requires a valid connection to ArcGIS Online or Portal for ArcGIS.
 - Target web maps must have edit permissions.
 
+## Copy Bookmarks Between Web Maps
+**Feature:**
+Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the transfer of all bookmarks from a source web map to one or more target web maps in AGOL or Portal for ArcGIS. The tool ensures each bookmark is uniquely named in the target maps, minimizing manual effort and helping maintain consistent navigation experiences across multiple web maps.
+
+![Untitled](https://github.com/user-attachments/assets/5437e701-21cd-426c-b769-2b7ce270b4f4)
+
+**Parameters:**
+| Parameter          | Description                                                      | Required | Example                                         |
+|--------------------|------------------------------------------------------------------|----------|-------------------------------------------------|
+| Source Web Map     | Source web map iItemID					`                     	| Yes      | a12b34c56d78e90f12a34b56c78d90ef`      |
+| Target Web Maps    | List of target web maps in same format   					    | Yes      | f98e76d54c32b10a98e76d54c32b10a9;e12f34g56h78i90j12k34l56m78n90op` |
+| Verbose Logging    | Enable detailed logging output                                   | Optional | Checked/Unchecked                               |
+
+**Limitations:**
+- Ownership & Permissions: You must own or have edit permissions for all target web maps.
+- Connection Dependency: The tool requires an active ArcGIS Pro connection to AGOL or Portal. If not connected, the tool will fail.
+- Bookmark Name Conflicts: If a bookmark name already exists in the target, the tool appends an incremental suffix (e.g., _1, _2) to ensure uniqueness.
+- No Selective Copy: All bookmarks from the source map are copied; selective copying is not yet supported.
+- Web Map Format: Only works with "Web Map" items (not "Web Scene" or other types).
+
 # Licence
 This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
 

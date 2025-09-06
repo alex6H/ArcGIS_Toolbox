@@ -38,6 +38,9 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
  - [Contact & Issues](#contact--issues)
 - [Licence](#licence)
 
+## Keywords
+`ArcGIS Pro` • `Python` • `Geoprocessing` • `Spatial Analysis` • `Data Management` • `Automation` • `GIS Tools` • `Geodatabase` • `AGOL` • `Portal` • `ArcPy` • `Workflow` • `Geospatial` • `ESRI`
+
 ## Requirements
 - **ArcGIS Pro 3.x** with the default Python environment (`arcgispro-py3`)
 - The tools have been tested with Arcgis Pro 3.3.5

@@ -1,5 +1,11 @@
 # ArcGIS Toolbox - Extra tools.tbx
 
+[![ArcGIS Pro](https://img.shields.io/badge/ArcGIS%20Pro-3.x-blue)](https://www.esri.com/en-us/arcgis/products/arcgis-pro/overview)
+[![Python](https://img.shields.io/badge/Python-3.7%2B-blue.svg)](https://www.python.org/)
+[![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
+
+> **Status:** Repository under active development. Feedback and contributions welcome!
+
 Welcome to the Tools Box repository, a collection of **custom ArcGIS Pro geoprocessing tools** to make some repetitive actions easier.  
 All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) and leverage Python functionality to streamline data management and automate workflows in both ArcGIS Pro and ArcGIS Online/Portal.
 
@@ -24,18 +30,28 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
 	- [Copy layers between web maps](#copy-layers-between-web-maps)
  	- [Copy layer symbology](#copy-layer-symbology)
  	- [Copy Bookmarks Between WebMaps](#copy-bookmarks-between-web-maps)
+ - [Contact & Issues](#contact--issues)
 - [Licence](#licence)
-
-This repository is under construction. Do not hesitate to raise any issue.
 
 ## Requirements
 - **ArcGIS Pro 3.x** with the default Python environment (`arcgispro-py3`)
+- The tools have been tested with Arcgis Pro 3.3.5
 - For some tools, ability to clone the ArcGIS environment to install extra packages
-The tools have been tested with Arcgis Pro 3.3.5
 
 ## Installation
-- Open ArcGIS Pro → Add Toolbox → select ArcGIS_Toolbox.atbx
-- Run any tool from the toolbox just like built-in geoprocessing tools
+
+1. **Download the Toolbox**
+   - [Download Extra_tools.atbx](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) from GitHub.
+
+2. **Add to ArcGIS Pro**
+   - Open ArcGIS Pro.
+   - Go to `Catalog` ➔ Right-click `Toolboxes` ➔ `Add Toolbox...`
+   - Select `Extra_tools.atbx`.
+
+3. **(Optional) Clone Python Environment for Extra Packages**
+   - Go to `Project > Package Manager` in ArcGIS Pro.
+   - Click the settings wheel ➔ Clone `arcgispro-py3`.
+   - Switch to your new environment and restart ArcGIS Pro.
 
 # 1. Data management
 ## Import All Project's shapefiles in the GDB
@@ -53,8 +69,11 @@ This tool manages shapefiles within an ArcGIS Pro project by:
 Please note that if you click "View details" you will have access to the logs.
 
 **Parameters:**
-- Geodatabase Path  (str): Path to the target File Geodatabase (GDB).
-- Reconnect Feature Classes  (str): Flag to indicate whether to reconnect feature classes to the layers ('true' or 'false').
+
+| Parameter                | Description                                                             | Required | Example                                 |
+|--------------------------|-------------------------------------------------------------------------|----------|-----------------------------------------|
+| Geodatabase Path         | Path to the target File Geodatabase (GDB).                              | Yes      | `C:\Data\MyDatabase.gdb`                |
+| Reconnect Feature Classes| Flag to indicate whether to reconnect feature classes to the layers.     | Yes      | `true` or `false`                       |
 
 ![image](https://github.com/user-attachments/assets/4d6876b7-927e-4095-b869-ec6dcb59fa54)
 
@@ -70,20 +89,24 @@ Reproject an entire Geodatabase to a new coordinate system with ease.
 Note that the new GDB will not displays automatically in your ArcGIS Pro project. You will have to import it manually.
 
 **Parameters:**
-- Geodatabase Path (str): Path to the original geodatabase containing the feature classes and datasets to be reprojected.
-- New Geodatabase Path (str): Path where the new geodatabase will be created to store reprojected feature classes. The default name will be the same as input GDB + "_Reprojected"
-- Reconnect to New GDB (str): Flag to indicate whether to reconnect feature classes in the ArcGIS Pro project to the new geodatabase ('true' or 'false').
-- EPSG (str): Spatial reference (coordinate system) for reprojecting the feature classes.
+
+| Parameter                | Description                                                                                              | Required | Example                                         |
+|--------------------------|----------------------------------------------------------------------------------------------------------|----------|-------------------------------------------------|
+| Geodatabase Path         | Path to the original geodatabase containing the feature classes and datasets to be reprojected.          | Yes      | `C:\Data\Source.gdb`                            |
+| New Geodatabase Path     | Path where the new geodatabase will be created to store reprojected feature classes.                     | Yes      | `C:\Data\Source_Reprojected.gdb`                |
+| Reconnect to New GDB     | Flag to indicate whether to reconnect feature classes in the ArcGIS Pro project to the new geodatabase.  | Yes      | `true` or `false`                               |
+| EPSG                     | Spatial reference (coordinate system) for reprojecting the feature classes.                              | Yes      | `4326`, `3857`, `EPSG:32633`                    |
 
 ![image](https://github.com/user-attachments/assets/b7eaab9a-6e94-40b4-bfa1-8a91bf005a67)
+
 
 # 2. Large Language Model (LLM)
 ## Data processing with online LLM
 
 **Feature:**
 
-This tool is designed to enhance your geospatial data processing capabilities by integrating a Large Language Model (LLM) like ChatGPT into your ArcGIS workflows. It allows you to extract and/or transform attribute data from a specified feature class, process that data using advanced language models, and store the results in a new field within the same feature class. The tool leverages the [DuckDuckGo search API ](https://github.com/deedy5/duckduckgo_search)
- to facilitate communication with the LLM, enabling you to perform tasks such as summarization, data extraction, and more.
+This tool is designed to enhance data processing capabilities by integrating a Large Language Model (LLM) like ChatGPT into your ArcGIS workflows. It allows you to extract and/or transform attribute data from a specified feature class, process that data using advanced language models, and store the results in a new field within the same feature class. The tool leverages the [DuckDuckGo search API ](https://github.com/deedy5/duckduckgo_search)
+ to facilitate communication with the LLM, enabling to perform tasks such as summarization, data extraction, and more.
 
 The DuckDuckGo Search API eliminates the need for a local setup of the LLM, but it does expose your data to external sources. Additionally, the DuckDuckGo Search API may temporarily block you if you exceed the allowed number of requests
 
@@ -96,22 +119,16 @@ Then clone the default _arcgispro-py3_ environnement, then switch to your new en
 The first run of the tool will install DuckDuckGo Search API (internet connection needed).
 
 **Parameters:**
-- Input Layer or Feature Class: Path to the input feature class or layer. This is the main dataset you will be working on.
-  - Example: C:\MyGDB.gdb\MyFeatureClass
-- Input attribute: Name of the field containing the attribute data to be processed. This is the source of the text data you want to analyze and send to the LLM.
-  - Example: description
-- LLM output column: Name of the new field where results will be stored. This field will be added to your feature class to store the LLM results.
-  - Example: processed_text
-- Task for the LLM: Description of the task to send to the LLM. This should specify what you want the LLM to do with the text data (e.g., summarize, extract specific info).
-  - Example: Extract the main location from the following description.
-- Model: The LLM model to use. Specify which model to employ for processing the text. With the DuckDuckGo search API these models are available:
-  - ChatGpt 4o-mini (from OpenAI).
-  - Claude-3-haiku (from Antropic)
-  - Llama-3.1 -70b (from Meta)
-  - Mixtral-8x7b (from Mistral)
-- Delay in second: Time to wait between processing records (useful for rate limiting). This helps to avoid overloading the API with too many requests at once.
-  - Example: 1.0 (waits 1 second between processing each record)
-- Force update of the duckduckgo_search library : Check this option to force the tool to update the duckduckgo_search package to the latest version, even if it is already installed.Restart of Arcgis will be requierd!
+
+| Parameter                           | Description                                                                                                                    | Required | Example                        |
+|--------------------------------------|--------------------------------------------------------------------------------------------------------------------------------|----------|--------------------------------|
+| Input Layer or Feature Class         | Path to the input feature class or layer. This is the main dataset you will be working on.                                     | Yes      | C:\MyGDB.gdb\MyFeatureClass    |
+| Input Attribute                      | Name of the field containing the attribute data to be processed. This is the source of the text data for the LLM.              | Yes      | description                    |
+| LLM Output Column                    | Name of the new field where results will be stored. This field will be added to your feature class to store the LLM results.   | Yes      | processed_text                 |
+| Task for the LLM                     | Description of the task to send to the LLM (e.g., summarize, extract specific info).                                           | Yes      | Extract the main location from the following description. |
+| Model                                | The LLM model to use. Specify which model to employ for processing the text. Available models (via DuckDuckGo search API):     | Yes      | ChatGpt 4o-mini, Claude-3-haiku, Llama-3.1-70b, Mixtral-8x7b |
+| Delay (seconds)                      | Time to wait between processing records (for rate limiting; helps avoid API overload).                                         | No       | 1.0                            |
+| Force Update duckduckgo_search Library| Check this option to force update the duckduckgo_search package to the latest version, even if already installed. ArcGIS restart required. | No       | true / false                   |
 
 Please note that, behind the scenes, the tool specifies the LLM with additional instructions: 'Show the answer between brackets; respond ONLY with the answer!' This is designed to prevent the LLM from being overly verbose, ensuring that the tool can extract the correct information. The tool then extracts the first element within the brackets from the LLM answer and sends it to the attribute table.
 
@@ -123,6 +140,7 @@ Output will be
 
 ![image](https://github.com/user-attachments/assets/06cb0082-c751-4896-818b-1d9404227554)
 
+
 # 3. Finder
 ## Unused feature class finder
 
@@ -133,8 +151,11 @@ Identify and manage unused feature classes within your Geodatabase to optimize s
 This tool identifies feature classes in specified geodatabases that are not used in any specified ArcGIS project maps. It compares the feature classes listed in the geodatabases against those referenced in the provided ArcGIS project files.
 
 **Parameters:**
-- Input Geodatabase(s)  (list of str): A list of paths to geodatabases. 
-- Input Project(s)  (list of str): A list of paths to ArcGIS project (.aprx) files. Leave empty to use the current project
+
+| Parameter             | Type        | Description                                                                                                         | Required | Example                                                        |
+|-----------------------|-------------|---------------------------------------------------------------------------------------------------------------------|----------|----------------------------------------------------------------|
+| Input Geodatabase(s)  | list of str | A list of file paths to geodatabases. Each path should be a string representing the full location of a GDB file.    | Yes      | "C:/Data/mydata.gdb"              |
+| Input Project(s)      | list of str | A list of file paths to ArcGIS project (.aprx) files. Leave empty to use the currently open ArcGIS project.         | No       | "C:/Projects/project1.aprx"         |
 
 ![image](https://github.com/user-attachments/assets/45eba596-fff1-4237-8432-85c951b64de4)
 
@@ -149,10 +170,10 @@ This tool helps you search through all .aprx files in a specified folder and sub
 
 **Parameters**
 
-- Root Folder Path :
-	- Specify the path to the folder where the search will be conducted. The tool will recursively search through this folder and its subdirectories for .aprx files.
-- Layout Name to search for : 
-	- Enter a substring (part of the layout name) or the full name to search for. The tool will look for layouts in each APRX file whose names contain this substring, regardless of the case (CaSE InSeNsItIve).
+| Parameter                 | Description                                                                                                              | Required | Example                      |
+|---------------------------|--------------------------------------------------------------------------------------------------------------------------|----------|------------------------------|
+| Root Folder Path          | Path to the folder where the search will be conducted. The tool will recursively search for `.aprx` files in subfolders. | Yes      | C:\Projects\GIS_Files        |
+| Layout Name to Search For | Substring or full layout name to look for (case insensitive). Searches for layouts in each `.aprx` whose name matches.   | Yes      | "mymap_AOL_12Dec2024"      |
 
  ![image](https://github.com/user-attachments/assets/0d135afb-2573-44cc-a1ca-f01caf6209d4)
 
@@ -168,21 +189,24 @@ If you need to determine whether relevant data exists within a specific AOI, thi
 
 **Parameters**
 
-- Input Path: Specify one or multiple folders containing your geospatial data.
-- Area of Interest (AOI): Provide the AOI feature class (POLYGON)
-- Spatial Relationship: Choose the spatial relationship type (e.g., INTERSECT, WITHIN,...).
-- Data Types:
-	- Geodatabases (.gdb): Check to include.
-	- Shapefiles (.shp): Check to include. (Locked files are skipped and raise a warning)
-	- GPX Files (.gpx): Check to include. (GPX is always considered as a POINTS layer)
-- Geometry Filters:
-	- Points: Check to include.
-	- Lines: Check to include.
-	- Polygons: Check to include.
+### Parameters
+
+| Parameter            | Type                | Description                                                                                                  | Required | Example(s)                             |
+|----------------------|---------------------|--------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------|
+| Input Path           | list of str         | One or more folder paths containing geospatial data.                                                         | Yes      | ["C:/GIS/Data", "D:/Projects/Spatial"] |
+| Area of Interest     | str (feature class) | Path to the AOI feature class (must be a POLYGON).                                                          | Yes      | "C:/GIS/Boundaries/aoi_polygon.shp"    |
+| Spatial Relationship | str                 | Spatial relationship type to apply (e.g., INTERSECT, WITHIN, CONTAINS, TOUCHES, OVERLAPS, CROSSES, etc.).   | Yes      | "INTERSECT"                            |
+| Geodatabases         | bool                | Include Geodatabases (.gdb) in the search.                                                                   | No       | True                                   |
+| Shapefiles           | bool                | Include Shapefiles (.shp) in the search. (Locked files are skipped with a warning.)                          | No       | True                                   |
+| GPX                  | bool                | Include GPX files (.gpx) in the search. (Always treated as POINTS layer.)                                    | No       | True                                   |
+| Points               | bool                | Include POINT geometry types.                                                                                | Yes      | True                                   |
+| Lines                | bool                | Include LINE geometry types.                                                                                 | Yes      | True                                   |
+| Polygons             | bool                | Include POLYGON geometry types.                                                                              | Yes      | True                                   |
 
 ![image](https://github.com/user-attachments/assets/9e62ea86-63f4-48b6-aa4f-6bec158e4086)
 
 Results are in the log "View details"
+
 
 # 4. ID Generator
 ## Incremental ID generator
@@ -199,18 +223,15 @@ This tool generates and populates a new column (new_ID) in an attribute table of
 
 **Parameters:**
 
-The tool takes several parameters to customize the unique IDs it generates and populates in the attribute table. Here's an explanation of each parameter:
-- Input Layer : This parameter specifies the input feature class where the new column will be added and populated with unique IDs.
-- Start Value : This is the initial value for the ID sequence. The first ID will start from this number.
-- Interval : This parameter defines the increment between successive IDs. 
-For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, etc.
-- Column Name : The name of the new column where the unique IDs will be stored. The tool checks if this column already exists and raises a warning before stopping if it does to not erase data.
-- Pad Zeroes : A boolean parameter that determines whether the IDs should be padded with leading zeros. This ensures all IDs have the same length. It is particulary useful when dealing with number in string format.
-	- Example: If there are 100 records and the IDs need to be padded with zeros, the generated IDs will be 001, 002, 003, ..., 100 instead of 1, 2, 3, ..., 100.
-- Prefix : An optional text string to be added before each unique ID. This can help in distinguishing IDs from different sources or datasets.
-	- Example: If the prefix is ID_, the generated IDs will be ID_001, ID_002, ID_003, ..., ID_100.
-- Suffix : An optional text string to be added after each unique ID, similar to the prefix.
-  - Example: If the suffix is _A, the generated IDs will be 001_A, 002_A, 003_A, ..., 100_A.
+| Parameter     | Type          | Description                                                                                                                     | Required | Example                |
+|---------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|----------|------------------------|
+| Input Layer   | str           | Path to the input feature class where the new column will be added and populated with unique IDs.                               | Yes      | "C:/GIS/Data/parcels.shp" |
+| Start Value   | int           | Initial value for the ID sequence. The first ID will start from this number.                                                    | Yes      | 1                      |
+| Interval      | int           | Increment between successive IDs.                                                                                              | Yes      | 2                      |
+| Column Name   | str           | Name of the new column for unique IDs. If the column exists, the tool raises a warning and stops to prevent overwriting data.  | Yes      | "UniqueID"             |
+| Pad Zeroes    | bool          | Whether to pad IDs with leading zeros so all IDs have the same length (useful for string-formatted numbers).                   | Yes      | True                   |
+| Prefix        | str (optional)| Optional text to add before each unique ID.                                                                                   | No       | "ID_"                  |
+| Suffix        | str (optional)| Optional text to add after each unique ID.                                                                                    | No       | "_A"                   |
 
 **Note that :**
 - If no prefix, suffix and padding are used, the data type will be integer (long)
@@ -221,6 +242,7 @@ For instance, if Start Value is 1 and Interval is 2, the IDs will be 1, 3, 5, et
 ## Random unique ID generator
 
 **Feature:**
+
 This tool create a column with unique random ID in the attribute table of a GDB feature class. The ID can include numbers, letters (upper, lower, or mixed case), and can have a specified maximum length.
 
 **Parameters:**
@@ -236,7 +258,9 @@ This tool create a column with unique random ID in the attribute table of a GDB 
 
 ![image](https://github.com/user-attachments/assets/e5045aca-e624-4166-b509-c7b3d0e00cfb)
 
+
 # 5. Export
+
 ## Export all layouts into .PAGX
 **Feature:**
 
@@ -270,6 +294,7 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 - Filenames are sanitized: all non-alphanumeric characters in map names are replaced with underscores.
 - Does not overwrite existing .mapx files with the same name; existing files may be replaced without warning.
 
+
 # 6. AGOL - PORTAL
 ## Item group membership checker
 
@@ -277,26 +302,28 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 
 This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
 
-<img width="745" height="189" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
+<img width="545" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
 
 It doesn't work in all cases (see Limitations)!
-**
-What It Does:**
 
-<img width="726" height="489" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
+**What It Does:**
+
+<img width="426" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
 
 - Checks all the groups an ArcGIS item is shared with and verifies if you're a member or owner of these groups.
 - Automatically attempts to add your user account to groups you're not already a member of.
 - Logs detailed results and provides clear feedback on membership and ownership status.
 
-<img width="974" height="810" alt="image" src="https://github.com/user-attachments/assets/bdca9ab2-72bc-4941-9da7-afaca975d342" />
+<img width="574" alt="image" src="https://github.com/user-attachments/assets/bdca9ab2-72bc-4941-9da7-afaca975d342" />
 
 **Parameters:**
 
-- Enter one or more ArcGIS item IDs you want to check or manage.
-- Add User to Groups : Choose whether to automatically add yourself to groups you're not currently a member of.
-- Take item ownership : Decide if you want the tool to attempt taking ownership of the specified items.
-- Run the tool and review the detailed messages provided in the AGP log/messages window.
+| Parameter             | Type                | Description                                                                                                   | Required | Example(s)                         |
+|-----------------------|---------------------|---------------------------------------------------------------------------------------------------------------|----------|-------------------------------------|
+| ArcGIS Item IDs       | list of str         | One or more ArcGIS item IDs to check or manage.                                                               | Yes      | d1e2f3g4h5i6        |
+| Add User to Groups    | bool                | Automatically add yourself to groups you're not currently a member of.                                         | No       | True                                |
+| Take Item Ownership   | bool                | Attempt to take ownership of the specified items.                                                             | No       | False                               |
+
 Note that if none of the checkboxes are selected, the logs gives your current user status in each groups
 
 **Limitations:**
@@ -304,9 +331,10 @@ Note that if none of the checkboxes are selected, the logs gives your current us
 - You must have sufficient permissions in at least one shared group to successfully transfer ownership.
 - Ownership transfer will fail if any associated group has restricted permissions set to "Group owner and managers" only, rather than "All group members".
 
-<img width="745" height="236" alt="image" src="https://github.com/user-attachments/assets/e6849772-333e-4884-ad77-56f089bfe8e8" />
+<img width="545" alt="image" src="https://github.com/user-attachments/assets/e6849772-333e-4884-ad77-56f089bfe8e8" />
 
 ## Copy layers between web maps
+
 **Feature:**
 This tool automates the process of copying layers from a source Web Map to one or more target Web Maps in AGOL PORTAL. 
 It supports the preservation of :
@@ -320,12 +348,13 @@ It supports the preservation of :
 
 **Parameters:**
 
-First of all, save the current modification in your webmaps then : 
-Source WebMap: Enter the source web map as the source for the layer(s) to be copy.
-Target WebMaps:  List of target web maps as the destination for the layer(s) to be copy
-Layer Names: Specify the layer(s) titles to copy from the source map to each target map.
+| Parameter        | Description                                                                                   |
+|------------------|-----------------------------------------------------------------------------------------------|
+| Source WebMap    | Enter the source web map as the source for the layer(s) to be copy.                           |
+| Target WebMaps   | List of target web maps as the destination for the layer(s) to be copy                        |
+| Layer Names      | Specify the layer(s) titles to copy from the source map to each target map.                   |
 
-<img width="660" height="576" alt="image" src="https://github.com/user-attachments/assets/f40f75f4-903d-43e2-9419-cbf55969e13c" />
+<img width="460" alt="image" src="https://github.com/user-attachments/assets/f40f75f4-903d-43e2-9419-cbf55969e13c" />
 
 Run the script then refresh the webmaps pages.
 The AGP log/messages window provide the detailed of what is happening behind the curtains
@@ -337,6 +366,7 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Loading Time: The tool requires time to load as it retrieves web map and layer lists from AGOL or PORTAL based on your selections. Please be patient during this process.
 
 ## Copy layer symbology
+
 **Feature:**
 
 - Synchronizes layer symbology and related visual settings from a source web map to one or more target web maps.
@@ -345,7 +375,7 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Supports batch processing for multiple target web maps.
 - Optional verbose mode for advanced debugging and detailed output.
 
-<img width="726" height="534" alt="image" src="https://github.com/user-attachments/assets/d74dc1f8-1dd6-4cb5-82dc-1e985936c6ac" />
+<img width="526"  alt="image" src="https://github.com/user-attachments/assets/d74dc1f8-1dd6-4cb5-82dc-1e985936c6ac" />
 
 **Parameters:**
 
@@ -366,12 +396,14 @@ The AGP log/messages window provide the detailed of what is happening behind the
 - Target web maps must have edit permissions.
 
 ## Copy Bookmarks Between Web Maps
+
 **Feature:**
 Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the transfer of all bookmarks from a source web map to one or more target web maps in AGOL or Portal for ArcGIS. The tool ensures each bookmark is uniquely named in the target maps, minimizing manual effort and helping maintain consistent navigation experiences across multiple web maps.
 
-![Untitled](https://github.com/user-attachments/assets/5437e701-21cd-426c-b769-2b7ce270b4f4)
+<img width="526"  alt="image" src="https://github.com/user-attachments/assets/5437e701-21cd-426c-b769-2b7ce270b4f4" />
 
 **Parameters:**
+
 | Parameter          | Description                                                      | Required | Example                                         |
 |--------------------|------------------------------------------------------------------|----------|-------------------------------------------------|
 | Source Web Map     | Source web map iItemID					`                     	| Yes      | a12b34c56d78e90f12a34b56c78d90ef`      |
@@ -385,20 +417,23 @@ Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the trans
 - No Selective Copy: All bookmarks from the source map are copied; selective copying is not yet supported.
 - Web Map Format: Only works with "Web Map" items (not "Web Scene" or other types).
 
-# Licence
-This work is licensed under the Creative Commons Attribution-NonCommercial 4.0 International License.
+## License
+
+This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
 
 You are free to:
-- Share: Copy and redistribute the material in any medium or format.
-- Adapt: Remix, transform, and build upon the material.
+- **Share** — copy and redistribute the material in any medium or format
+- **Adapt** — remix, transform, and build upon the material
 
-Under the following terms:
-- Attribution: You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
-- NonCommercial: You may not use the material for commercial purposes.
-- Citation: If you republish or modify the material, please include a citation to the original work.
+Under these terms:
+- **Attribution** — Give appropriate credit, link to the license, and indicate changes
+- **NonCommercial** — Not for commercial use
+- **Citation** — Cite the original work if republished
 
-No additional restrictions: You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
-
-For more details, see the full license at https://creativecommons.org/licenses/by-nc/4.0/.
+For full details, see the [license](https://creativecommons.org/licenses/by-nc/4.0/).
 
 
+## Contact & Issues
+
+- For help, feature requests, or bug reports, open an issue
+- Questions or suggestions? Reach out via GitHub or create a discussion

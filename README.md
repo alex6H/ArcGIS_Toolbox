@@ -8,6 +8,8 @@
 ![ArcGIS Pro](https://img.shields.io/badge/ArcGIS%20Pro-3.x-blue)
 ![Python](https://img.shields.io/badge/Python-arcgispro--py3-yellow)
 ![Status](https://img.shields.io/badge/Status-Active%20Development-green)
+![Visitors](https://api.visitorbadge.io/api/visitors?path=https%3A%2F%2Fgithub.com%2Falex6H%2FArcGIS_Toolbox&label=Repository%20Views&countColor=%23263759)
+
 
 Welcome to the Tools Box repository, a collection of **custom ArcGIS Pro geoprocessing tools** to make some repetitive actions easier.  
 All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atbx_**](https://github.com/alex6H/ArcGIS_Toolbox/blob/main/Extra%20tools.atbx) and leverage Python functionality to streamline data management and automate workflows in both ArcGIS Pro and ArcGIS Online/Portal.
@@ -550,3 +552,4 @@ For full details, see the [license](https://creativecommons.org/licenses/by-nc/4
 
 - For help, feature requests, or bug reports, open an issue
 - Questions or suggestions? Reach out via GitHub or create a discussion
+

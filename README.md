@@ -165,9 +165,11 @@ This tool identifies feature classes in specified geodatabases that are not used
 | Input Geodatabase(s)  | list of str | A list of file paths to geodatabases. Each path should be a string representing the full location of a GDB file.    | Yes      | "C:/Data/mydata.gdb"              |
 | Input Project(s)      | list of str | A list of file paths to ArcGIS project (.aprx) files. Leave empty to use the currently open ArcGIS project.         | No       | "C:/Projects/project1.aprx"         |
 
+
 ![image](https://github.com/user-attachments/assets/45eba596-fff1-4237-8432-85c951b64de4)
 
 Note that you will need to open "view details" at the bottom of the tool to see the list of unused feature classes in the logs.
+
 ![image](https://github.com/user-attachments/assets/43066d53-a019-4831-87a0-fd4b7293c96b)
 
 ## Layout Finder
@@ -196,8 +198,6 @@ This tool searches through geodatabases, shapefiles, and GPX files within a spec
 If you need to determine whether relevant data exists within a specific AOI, this tool automates the search process across multiple files and folders.
 
 **Parameters**
-
-### Parameters
 
 | Parameter            | Type                | Description                                                                                                  | Required | Example(s)                             |
 |----------------------|---------------------|--------------------------------------------------------------------------------------------------------------|----------|-----------------------------------------|
@@ -308,15 +308,13 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 
 **Feature:**
 
-This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item. If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
+This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item (see [Unable to change ownership](https://support.esri.com/en-us/knowledge-base/error-unable-to-change-ownership-000030643 ) ). If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
 
 <img width="545" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
 
 It doesn't work in all cases (see Limitations)!
 
 **What It Does:**
-
-<img width="426" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
 
 - Checks all the groups an ArcGIS item is shared with and verifies if you're a member or owner of these groups.
 - Automatically attempts to add your user account to groups you're not already a member of.
@@ -333,6 +331,8 @@ It doesn't work in all cases (see Limitations)!
 | Take Item Ownership   | bool                | Attempt to take ownership of the specified items.                                                             | No       | False                               |
 
 Note that if none of the checkboxes are selected, the logs gives your current user status in each groups
+
+<img width="426" alt="image" src="https://github.com/user-attachments/assets/e3b897bf-6cfc-4a28-aa71-f6592d13d23f" />
 
 **Limitations:**
 
@@ -362,7 +362,7 @@ It supports the preservation of :
 | Target WebMaps   | List of target web maps as the destination for the layer(s) to be copy                        |
 | Layer Names      | Specify the layer(s) titles to copy from the source map to each target map.                   |
 
-<img width="460" alt="image" src="https://github.com/user-attachments/assets/f40f75f4-903d-43e2-9419-cbf55969e13c" />
+<img width="460" alt="image" src="https://github.com/user-attachments/assets/61e71f81-fb14-48ea-a424-cf523f218c5f" />
 
 Run the script then refresh the webmaps pages.
 The AGP log/messages window provide the detailed of what is happening behind the curtains

@@ -232,6 +232,7 @@ Results will be in the "View" Details".
 ## Data finder with AOI
 
 **Feature:**
+
 Automatically search geodatabases, shapefiles, and GPX files within specified folders (and subfolders) to identify datasets with features matching a spatial relationship (e.g., INTERSECT, WITHIN) to a given Area of Interest (AOI). Filter results by geometry type (points, lines, polygons) for rapid, targeted data discovery.
 
 If you need to determine whether relevant data exists within a specific AOI, this tool automates the search process across multiple files and folders.
@@ -243,9 +244,7 @@ If you need to determine whether relevant data exists within a specific AOI, thi
 - Results are listed in the ArcGIS Pro "View Details" log, with dataset names and locations.
 - Displays status updates and progress throughout large searches.
 
-> Results are in the log "View details"
-> 
-> ![image](https://github.com/user-attachments/assets/9e62ea86-63f4-48b6-aa4f-6bec158e4086)
+> **Note:** Results are in the log "View details"
 
 **Parameters**
 
@@ -260,6 +259,8 @@ If you need to determine whether relevant data exists within a specific AOI, thi
 | Points               | bool                | Include POINT geometry types.                                                                                | Yes      | True                                   |
 | Lines                | bool                | Include LINE geometry types.                                                                                 | Yes      | True                                   |
 | Polygons             | bool                | Include POLYGON geometry types.                                                                              | Yes      | True                                   |
+
+![image](https://github.com/user-attachments/assets/9e62ea86-63f4-48b6-aa4f-6bec158e4086)
 
 **Limitations**
 
@@ -404,9 +405,10 @@ This script automates the export of all layouts within an ArcGIS Pro project to 
 
 This tool tries to solve the problem of not being able to add yourself as the owner of an AGOL portal item (see [Unable to change ownership](https://support.esri.com/en-us/knowledge-base/error-unable-to-change-ownership-000030643 ) ). If the new owner is not a member of all groups with which the item is shared, AGOL will block the owner change. The new owner must be added to all these groups, or the item must be unshared from those groups. This tool try to automatise this process.
 
+> **Note:** It doesn't work in all cases (see Limitations)!
+
 <img width="545" alt="image" src="https://github.com/user-attachments/assets/249a23fe-ed2b-4c04-9d6c-0fad3132ed7d" />
 
-It doesn't work in all cases (see Limitations)!
 
 - Checks all the groups an ArcGIS item is shared with and verifies if you're a member or owner of these groups.
 - Automatically attempts to add your user account to groups you're not already a member of.

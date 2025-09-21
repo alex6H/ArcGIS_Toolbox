@@ -16,6 +16,8 @@ Key Features:
 
 Usage: Provide an ArcGIS item ID to analyze its layer structure.
 
+Date: April 2025
+File : list_webapp_layers.py
 Author: github.com/alex6H
 """
 
@@ -152,37 +154,61 @@ def process_webexperience_and_list_webapp(item_id, gis):
     for app_id in embedded_app_ids:
         process_any_item(app_id, gis)
 
-def process_any_item(item_id, gis, visited=None):
+def process_any_item(item_id: str, gis: GIS, visited: Optional[Set[str]] = None) -> None:
     """
-    Processes any ArcGIS item and recursively processes related items.
+    Processes any ArcGIS item and recursively processes related items based on their type.
+
+    This function handles various types of ArcGIS items, including Web Maps, Web Experiences,
+    Dashboards, Web Mapping Applications, and Story Maps. It retrieves the item data and processes
+    associated web maps or embedded applications. The function uses a set to track visited item IDs
+    to prevent infinite recursion when processing items that may reference each other.
 
     Args:
-        item_id (str): ID of the item to process
-        gis (GIS): GIS connection object
-        visited (set, optional): Set of already visited item IDs to prevent infinite recursion
+        item_id (str): ID of the item to process.
+        gis (GIS): GIS connection object used to interact with the ArcGIS portal.
+        visited (set, optional): Set of already visited item IDs to prevent infinite recursion.
+                                 Defaults to None, which initializes an empty set.
+
+    Returns:
+        None
     """
+    # Initialize the visited set if not provided
     if visited is None:
         visited = set()
+
+    # Check if the item has already been processed to avoid infinite loops
     if item_id in visited:
         return
+
+    # Mark the current item as visited
     visited.add(item_id)
+
+    # Retrieve the item from the GIS portal
     item = gis.content.get(item_id)
     if not item:
         arcpy.AddWarning(f"Item ID {item_id} not found. Check if you are connected to the correct ArcGIS server (AGOL or PORTAL)")
         return
+
+    # Log the processing of the item
     arcpy.AddMessage("#" * 70)
     arcpy.AddMessage(f"Processing {item.type}: {item.title}")
     arcpy.AddMessage(f"with ID: {item_id}")
+
+    # Process the item based on its type
     if item.type == "Web Map":
+        # Display layers for Web Map items
         display_webmap_layers(item_id, gis)
     elif item.type == "Web Experience":
+        # Process embedded applications for Web Experience items
         process_webexperience_and_list_webapp(item_id, gis)
     elif item.type in ["Dashboard", "Web Mapping Application", "Story Map"]:
+        # Extract and process associated web maps for these item types
         app_data = item.get_data()
         webmap_ids = extract_webmap_ids(item.type, app_data, item_id, gis)
         for wm_id in webmap_ids:
             process_any_item(wm_id, gis, visited)
     else:
+        # Warn about unhandled item types
         arcpy.AddWarning(f"Unhandled item type: {item.type}")
 
 def report_invalid_item():
@@ -190,17 +216,6 @@ def report_invalid_item():
     Reports an error when an invalid item ID is provided.
     """
     arcpy.AddError("Provided URL does not point to a valid item. Please check if the ItemID is correct and if the active portal is set correctly (AGOL or MSF PORTAL).")
-
-def log_section(title):
-    """
-    Logs a section header with the given title.
-
-    Args:
-        title (str): Title of the section
-    """
-    arcpy.AddMessage("_" * 25 + "GIS Center Gremlins message" + "_" * 25)
-    arcpy.AddMessage(title)
-    arcpy.AddMessage("_" * 70)
 
 if __name__ == "__main__":
     """

@@ -548,6 +548,8 @@ The List Layers in Web App tool allows you to list all the layers present in the
 |--------------------|------------------------------------------------------------------|----------|-------------------------------------------------|
 | Web App Item ID    | The Item ID of the web application to analyze                   | Yes      | `a12iuztc56d78e90f1sdft56c78d90ef`            |
 
+<img width="705" height="226" alt="image" src="https://github.com/user-attachments/assets/7f24e7a3-27f8-44d6-bc20-e7370a127afd" />
+
 **How to Use It:**
 
 1. **Log into Portal or AGOL**: The tool uses the account and active portal from ArcGIS Pro
@@ -560,3 +562,4 @@ The List Layers in Web App tool allows you to list all the layers present in the
    - Service type (hosted vs external)
 
 **Example Output:**
+<img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/c390543a-a5e7-4cc4-b4ba-5d7390e0063b" />

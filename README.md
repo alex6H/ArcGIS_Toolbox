@@ -59,11 +59,13 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
    - Go to `Catalog` ➔ Right-click `Toolboxes` ➔ `Add Toolbox...`
    - Select `Extra_tools.atbx`.
 
-3. **(Optional) Clone Python Environment for Extra Packages**
+3. **Update Python Script Path**
+   - In the toolbox, ensure that the path to the `.py` files is correctly set. You may need to update the path if the scripts are not executing properly.
+
+4. **(Optional) Clone Python Environment for Extra Packages**
    - Go to `Project > Package Manager` in ArcGIS Pro.
    - Click the settings wheel ➔ Clone `arcgispro-py3`.
    - Switch to your new environment and restart ArcGIS Pro.
-
 
 ---
 

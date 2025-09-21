@@ -15,6 +15,8 @@ Key Features:
 - Provides detailed layer metadata (hosted vs external services)
 
 Usage: Provide an ArcGIS item ID to analyze its layer structure.
+
+Author: github.com/alex6H
 """
 
 from arcgis.gis import GIS

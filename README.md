@@ -565,3 +565,43 @@ The List Layers in Web App tool allows you to list all the layers present in the
 
 **Example Output:**
 <img width="1679" height="790" alt="image" src="https://github.com/user-attachments/assets/c390543a-a5e7-4cc4-b4ba-5d7390e0063b" />
+
+
+---
+
+## License
+
+This project is licensed under the **Creative Commons Attribution-NonCommercial 4.0 International License** (CC BY-NC 4.0).
+
+### What this means:
+
+**You are free to:**
+- ✅ **Share** — copy and redistribute the material in any medium or format
+- ✅ **Adapt** — remix, transform, and build upon the material
+
+**Under the following terms:**
+- 📝 **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made
+- 🚫 **NonCommercial** — You may not use the material for commercial purposes
+
+### Full License Text
+To view the complete license text, visit [http://creativecommons.org/licenses/by-nc/4.0/](http://creativecommons.org/licenses/by-nc/4.0/) or see the [LICENSE](LICENSE) file in this repository.
+
+---
+
+## Contributing
+
+Help improve this toolbox by reporting bugs, suggesting features, or contributing code. Follow existing styles and test thoroughly. Open issues for bugs or ideas, and submit pull requests for code changes.
+
+**Priorities:**
+- Fix bugs and optimize performance
+- Add new tools and improve documentation
+
+**Need Help?** Check issues or start a discussion.
+
+Contributors are acknowledged in the README and release notes.
+
+---
+
+⭐ **Star this repository if you find it helpful!**
+
+**Thank you for contributing to the ArcGIS Toolbox project!** 🚀

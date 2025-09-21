@@ -1,26 +1,42 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
 """
-This ArcGIS Pro tool checks group membership for specified portal items and manages user access.
+Tool Name: Item Group Membership Checker Tool
 
-Core functionality:
-- Connects to active ArcGIS Portal using "pro" authentication
-- Finds target user by email address
-- Retrieves items by ID and identifies associated groups
-- Checks if target user is member/owner of each group
-- Optionally adds user to groups they're not in
-- Optionally transfers item ownership to target user
+Summary: This ArcGIS Pro tool checks group membership for specified portal items and manages user access.
 
-Key features:
-- Handles multiple item IDs (semicolon-separated)
-- Skips Favorites groups (system groups)
-- Prevents duplicate group processing
-- Comprehensive error handling with arcpy messaging
-- Returns detailed summary statistics
+Parameters:
+    Item IDs: Semicolon-separated list of ArcGIS item IDs to check
+    Add to Groups: Boolean to automatically add user to groups they're not in
+    Take Ownership: Boolean to transfer item ownership to target user
+    Target Email: Email address of the user to check/add
+    Verbose Output: Boolean to enable detailed logging
+
+Core Functionality:
+    - Connects to active ArcGIS Portal using "pro" authentication
+    - Finds target user by email address
+    - Retrieves items by ID and identifies associated groups
+    - Checks if target user is member/owner of each group
+    - Optionally adds user to groups they're not in
+    - Optionally transfers item ownership to target user
+
+Key Features:
+    - Handles multiple item IDs (semicolon-separated)
+    - Skips Favorites groups (system groups)
+    - Prevents duplicate group processing
+    - Comprehensive error handling with arcpy messaging
+    - Returns detailed summary statistics
+
+Usage: For managing user access to portal items and their associated groups.
+
+Requirements:
+    - ArcGIS Pro with portal connection
+    - Valid ArcGIS Online credentials
+    - Administrative permissions for group management
+    - Edit permissions on target items
+
+Returns: Summary statistics of processed items and groups
 
 Date: April 2025
-File : item_group_membership_checker.py
+File: item_group_membership_checker.py
 Author: github.com/alex6H
 """
 

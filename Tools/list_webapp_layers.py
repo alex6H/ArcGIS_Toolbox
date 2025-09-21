@@ -1,23 +1,33 @@
 """
-ArcGIS Web Application Layer Inspector Tool
+Tool Name: ArcGIS Web Application Layer Inspector Tool
 
-This tool recursively analyzes ArcGIS web applications (Dashboards, Web Apps, 
+Summary: This tool recursively analyzes ArcGIS web applications (Dashboards, Web Apps, 
 Story Maps, Web Experiences) to extract and display all embedded web maps and 
 their operational layers. It traverses nested applications and provides 
 detailed layer information including names, URLs, and item IDs.
 
+Parameters:
+    Item ID: The ArcGIS item ID of the web application to analyze
+
 Key Features:
-- Supports multiple app types: Dashboard, Web Mapping Application, Story Map, Web Experience
-- Recursive processing to handle nested applications
-- Extracts web map IDs from various app configurations
-- Displays layer hierarchy including group layers and sub-layers
-- Prevents infinite recursion with visited item tracking
-- Provides detailed layer metadata (hosted vs external services)
+    - Supports multiple app types: Dashboard, Web Mapping Application, Story Map, Web Experience
+    - Recursive processing to handle nested applications
+    - Extracts web map IDs from various app configurations
+    - Displays layer hierarchy including group layers and sub-layers
+    - Prevents infinite recursion with visited item tracking
+    - Provides detailed layer metadata (hosted vs external services)
 
 Usage: Provide an ArcGIS item ID to analyze its layer structure.
 
+Requirements:
+    - ArcGIS Pro with portal connection
+    - Valid ArcGIS Online credentials
+    - Read access to the target application
+
+Returns: None (displays results to ArcGIS Pro messages)
+
 Date: April 2025
-File : list_webapp_layers.py
+File: list_webapp_layers.py
 Author: github.com/alex6H
 """
 

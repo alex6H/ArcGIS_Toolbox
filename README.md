@@ -37,6 +37,7 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
 	- [Copy layers between web maps](#copy-layers-between-web-maps)
  	- [Copy layer symbology](#copy-layer-symbology)
  	- [Copy Bookmarks Between WebMaps](#copy-bookmarks-between-web-maps)
+	- [List Layers in Web App](#list-layers-in-web-app)
  - [Contact & Issues](#contact--issues)
 - [Licence](#licence)
 
@@ -71,12 +72,12 @@ All tools are packaged as an `.atbx` (ArcGIS Pro toolbox) in [**_Extra_tools.atb
 
 **Feature:**
 
-Effortlessly import all shapefiles from your ArcGIS Pro project into a File Geodatabase (GDB), reprojecting them to [EPSG:3857 (Web Mercator)](https://epsg.io/3857). Optionally, reconnect your project’s feature layers to the newly imported feature classes.
+Effortlessly import all shapefiles from your ArcGIS Pro project into a File Geodatabase (GDB), reprojecting them to [EPSG:3857 (Web Mercator)](https://epsg.io/3857). Optionally, reconnect your project's feature layers to the newly imported feature classes.
 
 - Automatic Extraction: Finds all shapefile-based feature layers in your ArcGIS Pro project (.aprx).
 - Batch Import: Imports all shapefiles into a specified GDB and feature dataset with a uniform spatial reference (EPSG:3857).
 - Layer Reconnection: Optionally, updates the project to reference the new GDB feature classes rather than the original shapefiles.
-- Detailed Logging: View process status and logs directly in the geoprocessing tool’s "View details" pane.
+- Detailed Logging: View process status and logs directly in the geoprocessing tool's "View details" pane.
 
 Please note that if you click "View details" you will have access to the logs.
 
@@ -527,29 +528,35 @@ Copy Bookmarks Between Web Maps is a geoprocessing tool that automates the trans
 - No Selective Copy: All bookmarks from the source map are copied; selective copying is not yet supported.
 - Web Map Format: Only works with "Web Map" items (not "Web Scene" or other types).
 
+## List Layers in Web App
 
----
+**Feature:**
 
-## License
+The List Layers in Web App tool allows you to list all the layers present in the web maps used by a web application hosted on ArcGIS Online or Portal. It works with various types of web applications, including Dashboards, Web Mapping Applications, and Web Experience Builder apps. (Story Maps not yet tested) This tool is particularly useful to get the list of datasource of web applications without the need to open them and dig into the settings.
 
-This project is licensed under the [Creative Commons Attribution-NonCommercial 4.0 International License](https://creativecommons.org/licenses/by-nc/4.0/).
+- **Multi-App Support**: Works with Dashboards, Web Mapping Applications, Web Experience Builder apps, and Story Maps
+- **Recursive Processing**: Handles nested applications and embedded web maps automatically
+- **Layer Hierarchy**: Displays both group layers and individual sub-layers with their relationships
+- **Detailed Metadata**: Shows layer names, item IDs, URLs, and service types (hosted vs external)
+- **Smart Detection**: Automatically identifies and processes all web maps within complex application structures
 
-You are free to:
-- **Share** — copy and redistribute the material in any medium or format
-- **Adapt** — remix, transform, and build upon the material
+> **Note:** Results are displayed in the "View Details" panel in ArcGIS Pro. Open this panel to see the complete layer inventory.
 
-Under these terms:
-- **Attribution** — Give appropriate credit, link to the license, and indicate changes
-- **NonCommercial** — Not for commercial use
-- **Citation** — Cite the original work if republished
+**Parameters:**
 
-For full details, see the [license](https://creativecommons.org/licenses/by-nc/4.0/).
+| Parameter          | Description                                                      | Required | Example                                         |
+|--------------------|------------------------------------------------------------------|----------|-------------------------------------------------|
+| Web App Item ID    | The Item ID of the web application to analyze                   | Yes      | `a12iuztc56d78e90f1sdft56c78d90ef`            |
 
+**How to Use It:**
 
----
+1. **Log into Portal or AGOL**: The tool uses the account and active portal from ArcGIS Pro
+2. **Get the Web App Item ID**: Copy the item ID from the URL of your web application on ArcGIS Online or Portal
+3. **Run the Tool**: Enter the item ID into the tool and execute it
+4. **Review the Results**: The tool will log the following information for each layer:
+   - Layer Name
+   - Layer Item ID  
+   - Layer URL
+   - Service type (hosted vs external)
 
-## Contact & Issues
-
-- For help, feature requests, or bug reports, open an issue
-- Questions or suggestions? Reach out via GitHub or create a discussion
-
+**Example Output:**

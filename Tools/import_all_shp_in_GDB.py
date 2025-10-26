@@ -1,5 +1,5 @@
 """
-Tool Name: Shapefile Importer and Connector Tool
+Tool Name: Import all shapefile in the GDB
 
 Summary: This tool processes an ArcGIS Pro project to extract feature layer paths, import shapefiles into a specified File Geodatabase, and optionally reconnect these shapefiles to corresponding feature classes within the geodatabase.
 
